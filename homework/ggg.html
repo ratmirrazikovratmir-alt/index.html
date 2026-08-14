@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тир — тренажёр правописания</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="range">
+
+  <!-- ================= HUD ================= -->
+  <header class="hud">
+    <div class="hud-block">
+      <span class="hud-label">Раунд</span>
+      <span class="hud-value" id="roundValue">1</span>
+    </div>
+
+    <div class="hud-block lives-block">
+      <span class="hud-label">Патроны</span>
+      <span class="lives" id="livesValue">●●●</span>
+    </div>
+
+    <div class="hud-block">
+      <span class="hud-label">Попадания</span>
+      <span class="hud-value hit-color" id="hitsValue">0</span>
+    </div>
+
+    <div class="hud-block">
+      <span class="hud-label">Промахи</span>
+      <span class="hud-value miss-color" id="missesValue">0</span>
+    </div>
+
+    <div class="hud-block">
+      <span class="hud-label">Серия</span>
+      <span class="hud-value streak-color" id="streakValue">0</span>
+    </div>
+  </header>
+
+  <!-- ============= TIMER BAR ============= -->
+  <div class="timer-track">
+    <div class="timer-fill" id="timerFill"></div>
+  </div>
+
+  <!-- ============= MAIN STAGE ============= -->
+  <main class="stage">
+
+    <!-- Стартовый экран -->
+    <section class="screen" id="startScreen">
+      <h1 class="title">ТИР</h1>
+      <p class="subtitle">Тренажёр правописания на скорость</p>
+      <p class="rules">
+        На мишени появится слово на русском. Успей напечатать
+        английский перевод и нажать <span class="key">Enter</span>,
+        пока не закончилось время. Три промаха — и рубеж закрыт.
+      </p>
+      <button class="btn btn-primary" id="startBtn">Занять рубеж</button>
+    </section>
+
+    <!-- Игровой экран -->
+    <section class="screen screen-game hidden" id="gameScreen">
+
+      <div class="board-wrap">
+        <div class="crosshair" id="crosshair">
+          <span class="ch-line ch-h"></span>
+          <span class="ch-line ch-v"></span>
+          <span class="ch-dot"></span>
+        </div>
+
+        <div class="target" id="target">
+          <div class="target-ring ring-3"></div>
+          <div class="target-ring ring-2"></div>
+          <div class="target-ring ring-1"></div>
+          <div class="target-center">
+            <span class="prompt-label">Переведи слово</span>
+            <span class="prompt-word" id="promptWord">слово</span>
+          </div>
+          <div class="marks" id="marks"></div>
+        </div>
+
+        <div class="muzzle-flash" id="muzzleFlash"></div>
+      </div>
+
+      <form class="fire-form" id="fireForm" autocomplete="off">
+        <input
+          type="text"
+          id="answerInput"
+          class="scope-input"
+          placeholder="ВВЕДИ ПЕРЕВОД..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button type="submit" class="btn btn-fire" id="fireBtn">Огонь</button>
+      </form>
+
+      <p class="feedback" id="feedback">&nbsp;</p>
+    </section>
+
+    <!-- Экран результатов -->
+    <section class="screen hidden" id="resultScreen">
+      <h2 class="title title-sm" id="resultTitle">РУБЕЖ ЗАКРЫТ</h2>
+
+      <div class="result-grid">
+        <div class="result-card">
+          <span class="result-num hit-color" id="resHits">0</span>
+          <span class="result-label">попаданий</span>
+        </div>
+        <div class="result-card">
+          <span class="result-num miss-color" id="resMisses">0</span>
+          <span class="result-label">промахов</span>
+        </div>
+        <div class="result-card">
+          <span class="result-num streak-color" id="resStreak">0</span>
+          <span class="result-label">лучшая серия</span>
+        </div>
+        <div class="result-card">
+          <span class="result-num" id="resAccuracy">0%</span>
+          <span class="result-label">точность</span>
+        </div>
+      </div>
+
+      <p class="rank" id="resultRank"></p>
+
+      <button class="btn btn-primary" id="restartBtn">Ещё раз</button>
+    </section>
+
+  </main>
+</div>
+
+<script src="./js/script.js"></script>
+</body>
+</html>
